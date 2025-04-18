@@ -1,10 +1,11 @@
-"use client"
-import { useEffect, useRef, useState } from "react"
-import { Canvas, useThree, extend } from "@react-three/fiber"
-import { shaderMaterial } from "@react-three/drei"
-import * as THREE from "three"
+"use client";
 
-// Shader material
+import { useEffect, useRef, useState } from "react";
+import { Canvas, extend } from "@react-three/fiber";
+import { shaderMaterial } from "@react-three/drei";
+import * as THREE from "three";
+
+// Custom shader material for RGB split effect
 const RGBMaterial = shaderMaterial(
     {
         uTexture: null,
@@ -38,8 +39,24 @@ const RGBMaterial = shaderMaterial(
   `
 );
 
+// Make the shader usable in JSX
 extend({ RGBMaterial });
 
+// Hook to detect screen size
+const useIsSmallScreen = () => {
+    const [isSmall, setIsSmall] = useState(false);
+
+    useEffect(() => {
+        const check = () => setIsSmall(window.innerWidth < 640);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+
+    return isSmall;
+};
+
+// Plane with RGB split shader
 const ImagePlane = ({ texture, x }) => {
     const materialRef = useRef();
 
@@ -61,8 +78,10 @@ const ImagePlane = ({ texture, x }) => {
     );
 };
 
+// Main 3D content component
 const RGBSplit = () => {
     const [textures, setTextures] = useState([]);
+    const isSmallScreen = useIsSmallScreen();
 
     useEffect(() => {
         const loader = new THREE.TextureLoader();
@@ -85,20 +104,18 @@ const RGBSplit = () => {
 
     return (
         <>
-            <ImagePlane texture={textures[0]} x={-8.5} />
+            {!isSmallScreen && <ImagePlane texture={textures[0]} x={-8.5} />}
             <ImagePlane texture={textures[1]} x={0} />
-            <ImagePlane texture={textures[2]} x={8.5} />
+            {!isSmallScreen && <ImagePlane texture={textures[2]} x={8.5} />}
         </>
     );
 };
 
+// Top-level component with Canvas
 export default function RGBSplitImage() {
     return (
         <div className="relative w-full h-screen overflow-hidden">
-            <Canvas
-                className="w-full h-full"
-                camera={{ position: [0, 0, 6] }}
-            >
+            <Canvas camera={{ position: [0, 0, 6] }}>
                 <RGBSplit />
             </Canvas>
         </div>

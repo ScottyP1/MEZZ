@@ -34,21 +34,27 @@ export default function Footer() {
             <div className="absolute inset-0 flex z-20 flex-col items-center justify-center text-white px-4 bg-black/40">
                 <h1 className="text-4xl font-bold mb-4 text-center text-red-500 tracking-[10px]" style={{ fontFamily: 'marker' }}>FOLLOW MEZZ</h1>
 
-                <div className="flex space-x-6 mb-6 mt-12">
+                <div className="flex space-x-6 mb-4">
                     <Link href="https://www.tiktok.com/@official.mezz">
                         <FaTiktok size={36} color='red' className="hover:text-gray-400 transition-colors" />
                     </Link>
                     <Link href="https://www.instagram.com/official.mezz">
                         <RiInstagramFill size={36} color='red' className="hover:text-gray-400 transition-colors" />
                     </Link>
-                    <FaApple size={36} color='red' />
-                    <FaSoundcloud size={36} color='red' />
-                    <FaSpotify size={36} color='red' />
-                    <FaFacebook size={36} color='red' />
-
+                    <Link href='https://music.apple.com/us/artist/mezz/1800083744'>
+                        <FaApple size={36} color='red' />
+                    </Link>
+                    <Link href='https://soundcloud.com/officialmezz?ref=clipboard&p=i&c=1&si=C66CA815999E48948A15F924528F063E&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing'>
+                        <FaSoundcloud size={36} color='red' />
+                    </Link>
+                    <Link href='https://open.spotify.com/artist/2IDHmy8yjm8ASIpFv4A1R0?si=CA_aZemPSh-ExSlNzLbNtA&utm_medium=share&utm_source=linktree&nd=1&dlsi=d0e2ee9333014d4d'>
+                        <FaSpotify size={36} color='red' />
+                    </Link>
                 </div>
 
-                <h2 className="text-xl font-medium text-red-500">NickMessMusic@gmail.com</h2>
+                <h2 className="text-xl font-medium text-red-500">
+                    <a href="mailto:booking@yomezz.com">booking@yomezz.com</a>
+                </h2>
             </div>
         </div>
     );
