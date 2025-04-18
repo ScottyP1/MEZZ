@@ -14,17 +14,20 @@ export default function Footer() {
             id="connect"
             className="relative w-screen h-screen overflow-hidden [mask-image:radial-gradient(ellipse_at_center,white,transparent)] mt-32">
             {/* Background Image */}
-            <Image
-                src="/connectImg.png"
-                alt="Connect Background"
-                fill
-                priority
-                className="
-    object-cover object-center z-10
-    sm:scale-100 scale-[1.9]
-    sm:aspect-auto aspect-square
-  "
-            />
+            <div className="relative w-full h-full">
+                <Image
+                    src="/connectImg.png"
+                    alt="Connect Background"
+                    fill
+                    priority
+                    className="
+      object-cover object-center z-10
+      sm:scale-100 scale-[1.9]
+      sm:aspect-auto aspect-square
+    "
+                />
+                <div className="absolute top- left-0 w-full h-full z-20 pointer-events-none bg-gradient-to-b from-black via-transparent to-transparent" />
+            </div>
 
 
             {/* Overlay content */}
