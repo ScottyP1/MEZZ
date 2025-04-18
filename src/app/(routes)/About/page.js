@@ -9,7 +9,7 @@ export default function AboutPage() {
                 <div className="flex flex-col md:flex-row items-center gap-10">
                     {/* DJ Image */}
                     <img
-                        src="/storyImg.jpg"
+                        src="/storyImg2.jpg"
                         alt="Mezz performing"
                         className="w-90 h-90 object-cover rounded-full shadow-2xl border-4 border-white/10 hover:scale-105 transition"
                     />
