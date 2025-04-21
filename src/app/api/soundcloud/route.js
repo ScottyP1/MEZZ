@@ -1,27 +1,33 @@
+import Parser from 'rss-parser'; // Import the rss-parser library
+
 export async function GET(request) {
-    const SOUNDCLOUD_ID = process.env.SOUNDCLOUD_ID; // Ensure you add your client_id in .env file
-    const SOUNDCLOUD_USERID = process.env.SOUNDCLOUD_USERID; // Add your user ID as well
+    const SOUNDCLOUD_USERID = process.env.SOUNDCLOUD_USERID; // Optional: your SoundCloud User ID
+
+    const parser = new Parser(); // Create a new parser instance
+    const trackFeedUrl = `https://soundcloud.com/${SOUNDCLOUD_USERID}/rss`; // Use the RSS feed URL
 
     try {
-        // Fetch tracks from the user using the user ID
-        const trackRes = await fetch(
-            `https://api.soundcloud.com/users/${SOUNDCLOUD_USERID}/tracks?client_id=${SOUNDCLOUD_ID}`
-        );
+        // Fetch and parse the RSS feed
+        const feed = await parser.parseURL(trackFeedUrl);
 
-        if (!trackRes.ok) {
-            const trackError = await trackRes.text(); // Log error response for tracks
-            console.error('Error fetching tracks:', trackError);
-            throw new Error('Failed to fetch tracks');
+        if (!feed.items || feed.items.length === 0) {
+            console.error('No tracks found in the RSS feed');
+            throw new Error('No tracks available');
         }
 
-        const tracks = await trackRes.json();
+        // Map the RSS feed items to a list of tracks with title and URL
+        const tracks = feed.items.map((item) => ({
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate, // You can add more fields if needed
+        }));
 
-        // Return tracks in the response
+        // Return the tracks in the response
         return new Response(JSON.stringify({ tracks }), {
             status: 200,
         });
     } catch (error) {
-        // Log the error message and any extra information for debugging
+        // Log the error message for debugging
         console.error('Error:', error.message);
         return new Response(JSON.stringify({ error: error.message }), {
             status: 500,
