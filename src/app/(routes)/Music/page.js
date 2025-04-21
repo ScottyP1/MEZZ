@@ -1,7 +1,28 @@
+import AlbumList from "@/components/AlbumList";
+import SpotifyLink from "@/components/SpotifyLink";
+
 export default function MusicPage() {
     return (
-        <div className="mt-84 h-screen">
-            <h1 className='text-center text-4xl tracking-[10px] text-red-500' style={{ fontFamily: 'marker' }}>COMING SOON</h1>
+        <div className="px-4 sm:px-8 mx-auto max-w-full">
+            {/* Spotify section */}
+            <div className="mt-42 flex flex-col items-center justify-center text-center">
+                <h1 className="text-4xl tracking-[10px] mb-4 text-red-500">SPOTIFY</h1>
+                <SpotifyLink />
+                <AlbumList music_site="spotify" />
+            </div>
+
+            {/* Soundcloud section */}
+            <div className="mt-42 flex flex-col items-center justify-center text-center">
+                <h1 className="text-4xl tracking-[10px] mb-4 text-red-500">SOUNDCLOUD</h1>
+                {/* <AlbumList music_site="soundcloud" /> */}
+                <h1 className="text-center text-red- 500 text-4xl tracking-[10px]">Coming Soon</h1>
+            </div>
+            {/* Apple section */}
+            <div className="mt-42 flex flex-col items-center justify-center text-center">
+                <h1 className="text-4xl tracking-[10px] mb-4 text-red-500">APPLE MUSIC</h1>
+                {/* <AlbumList music_site="apple" /> */}
+                <h1 className="text-center text-red- 500 text-4xl tracking-[10px]">Coming Soon</h1>
+            </div>
         </div>
-    )
+    );
 }

@@ -23,11 +23,10 @@ export default function Home() {
         <RGBSplitImage />
       </div>
 
-      {/* Spotify Section */}
+      {/* Music Section */}
       <div className='mt-24 text-center'>
         <h1 className='text-4xl tracking-[10px] text-red-500'>MUSIC</h1>
         <div className="flex flex-wrap justify-center mt-12">
-          {/* <SpotifyLink /> */}
           <AlbumCarousel />
         </div>
       </div>
