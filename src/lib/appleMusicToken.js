@@ -11,7 +11,7 @@ export function generateAppleMusicToken() {
     }
 
     // Replace escaped newlines in private key, if necessary
-    privateKey = privateKey.replace(/\\n/g, '\n');
+    // privateKey = privateKey.replace(/\\n/g, '\n');
 
     try {
         const token = jwt.sign(
